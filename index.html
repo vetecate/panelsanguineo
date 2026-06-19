@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Vetecate | Hemogramas y Bioquímicas</title>
+<style>
+  :root{
+    --navy:#0b2a49;
+    --blue:#0b4f9c;
+    --sky:#0f7be0;
+    --cyan:#1ca7ff;
+    --bg:#eef5fb;
+    --card:#ffffff;
+    --line:#d7e4f1;
+    --text:#17324d;
+    --muted:#5f7288;
+    --good:#0ea36a;
+    --shadow:0 14px 32px rgba(11,42,73,.12);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:radial-gradient(circle at top, #ffffff 0, var(--bg) 45%, #e8f1fa 100%);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+  .wrap{max-width:760px;margin:0 auto;padding:14px 14px 28px}
+  .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy),var(--blue) 58%,var(--sky));border-radius:30px;padding:16px 16px 18px;box-shadow:var(--shadow);color:#fff}
+  .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.10)}
+  .hero:before{width:160px;height:160px;right:-55px;top:-45px}
+  .hero:after{width:90px;height:90px;left:-20px;bottom:-25px}
+  .logo{display:block;max-width:300px;width:100%;margin:0 auto 6px;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}
+  .kicker{text-align:center;font-size:13px;opacity:.95;margin:0 0 8px;letter-spacing:.2px}
+  h1{margin:0;text-align:center;font-size:29px;line-height:1.02;text-transform:uppercase;font-weight:900;letter-spacing:.3px}
+  .sub{text-align:center;margin:10px auto 0;max-width:560px;font-size:14px;line-height:1.45;opacity:.96}
+  .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px}
+  .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(4px);padding:8px 11px;border-radius:999px;font-size:12px;font-weight:700}
+  .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+  .card{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:24px;padding:15px;box-shadow:0 8px 20px rgba(11,42,73,.06);overflow:hidden}
+  .head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .head h2{margin:0;font-size:18px;color:var(--navy)}
+  .emoji{font-size:22px}
+  p{margin:0 0 10px;line-height:1.48;font-size:14px}
+  .muted{color:var(--muted)}
+  .highlight{background:linear-gradient(180deg,#fff, #f3f8fe);border:1px dashed #b9d0ea;border-radius:18px;padding:12px;margin-top:10px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
+  .tab{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:999px;padding:10px 12px;font-weight:800;font-size:12px}
+  .tab.active{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border-color:transparent}
+  .panel{display:none;margin-top:12px}
+  .panel.active{display:block}
+  .list{display:grid;gap:10px}
+  .item{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:16px;background:#fff;padding:12px}
+  .badge{min-width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e7f2ff,#d7e9ff);font-size:18px}
+  .item b{display:block;color:var(--navy);margin-bottom:2px}
+  .item span{display:block;color:var(--muted);font-size:13px;line-height:1.4}
+  .pricing{display:grid;gap:10px}
+  .price{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid var(--line);border-radius:16px;background:#fff;padding:12px}
+  .price .name{font-weight:800;color:var(--navy)}
+  .price .val{font-weight:900;color:var(--blue);font-size:17px}
+  .price small{display:block;color:var(--muted);margin-top:2px}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn{display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:16px;padding:13px 12px;font-weight:900;font-size:14px}
+  .btn.whatsapp{background:linear-gradient(135deg,#1fbf63,#0ea36a);color:#fff}
+  .btn.call{background:linear-gradient(135deg,var(--sky),var(--navy));color:#fff}
+  .btn.mail{background:#fff;border:1px solid var(--line);color:var(--navy)}
+  .btn.link{background:#fff;border:1px solid var(--line);color:var(--blue)}
+  .timeline{position:relative;padding-left:14px}
+  .timeline:before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:3px;background:linear-gradient(var(--sky),var(--navy));border-radius:999px}
+  .step{position:relative;padding-left:28px;margin-bottom:14px}
+  .step:last-child{margin-bottom:0}
+  .step:before{content:"";position:absolute;left:-2px;top:5px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--blue);box-shadow:0 0 0 4px rgba(11,79,156,.10)}
+  .step b{display:block;margin-bottom:4px;color:var(--navy)}
+  .step p{margin:0;color:var(--muted);font-size:13px}
+  .footer{margin-top:12px;text-align:center;color:var(--muted);font-size:12px;line-height:1.5}
+  .note{font-size:12px;color:var(--muted);background:#f8fbff;border:1px solid var(--line);border-radius:16px;padding:10px}
+  @media(min-width:700px){.grid{grid-template-columns:1.08fr .92fr}.list{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <img class="logo" src="logochico.png" alt="Vetecate">
+    <p class="kicker">🏥 Hospital Veterinario de Especialidad · Tecate, B.C.</p>
+    <h1>Hemogramas y Bioquímicas<br>para tu veterinaria</h1>
+    <p class="sub">Un servicio rápido, claro, profesional y con apoyo clínico para ayudarte a resolver mejor cada caso. 🩺</p>
+    <div class="chips">
+      <div class="chip">📦 Recolección en ruta</div>
+      <div class="chip">📞 Interpretación básica sin costo</div>
+      <div class="chip">⚡ Atención ágil</div>
+      <div class="chip">🤝 Atención personaizada</div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <div class="head"><h2>Propuesta comercial</h2><div class="emoji">💼</div></div>
+      <p>Vetecate ofrece a veterinarias, clinicas y médicos independientes un sistema de análisis externo para hemogramas y bioquímicas con logística de recolección, entrega de resultados y acompañamiento inicial por teléfono.</p>
+      <p class="muted">La intención es ayudarte a diagnosticar mejor sin cargar con la inversión de equipo, reactivos ni operación interna.</p>
+      <div class="highlight">
+        <p style="margin:0"><b>Lo más útil:</b> tú solicitas el estudio, nosotros recolectamos en horario de ruta, procesamos y devolvemos resultados con una lectura rápida sin costo.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head"><h2>Contacto inmediato</h2><div class="emoji">📲</div></div>
+      <p><b>Hospital Veterinario de Especialidad Vetecate</b><br>Tecate, B.C.</p>
+      <div class="actions">
+        <a class="btn call" href="tel:6651002308">Llamar</a>
+        <a class="btn whatsapp" href="https://wa.me/526653924735" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn mail" href="mailto:vetecate@gmail.com">Correo</a>
+        <a class="btn link" href="#tarifas">Ver tarifas</a>
+      </div>
+      <p class="note" style="margin-top:10px">🚚 Recolección por la tarde, de 2:00 a 4:00 pm, según rutas y solicitudes del día.</p>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:12px">
+    <div class="head"><h2>Servicios disponibles</h2><div class="emoji">🧪</div></div>
+    <div class="tabs">
+      <button class="tab active" onclick="show('p1', this)">Hemograma</button>
+      <button class="tab" onclick="show('p2', this)">Bioquímica</button>
+      <button class="tab" onclick="show('p3', this)">Paquete</button>
+    </div>
+    <div id="p1" class="panel active">
+      <div class="list">
+        <div class="item"><div class="badge">🩸</div><div><b>Hemograma</b><span>Apoya en anemia, infecciones, inflamación, alteraciones leucocitarias, plaquetas, deshidratación y seguimiento terapéutico.</span></div></div>
+        <div class="item"><div class="badge">🔬</div><div><b>Uso clínico</b><span>Muy útil en pacientes prequirúrgicos, enfermos agudos o casos donde necesitas saber cómo va la evolución.</span></div></div>
+      </div>
+    </div>
+    <div id="p2" class="panel">
+      <div class="list">
+        <div class="item"><div class="badge">🧬</div><div><b>Bioquímica sanguínea</b><span>Evalúa función renal, hepática, proteínas, glucosa, electrolitos y estado metabólico general.</span></div></div>
+        <div class="item"><div class="badge">📈</div><div><b>Uso clínico</b><span>Ideal para geriátricos, pacientes crónicos, sospecha de enfermedad sistémica y chequeos completos.</span></div></div>
+      </div>
+    </div>
+    <div id="p3" class="panel">
+      <div class="list">
+        <div class="item"><div class="badge">🧩</div><div><b>Hemograma + Bioquímica</b><span>La mejor opción cuando necesitas una visión integral del paciente y un respaldo diagnóstico más sólido.</span></div></div>
+        <div class="item"><div class="badge">🎯</div><div><b>Aplicación práctica</b><span>Muy recomendable para casos complejos, hospitalizados y valoraciones donde cada minuto cuenta.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="tarifas" style="margin-top:12px">
+    <div class="head"><h2>Tarifas y condiciones</h2><div class="emoji">💰</div></div>
+    <div class="pricing">
+      <div class="price"><div><div class="name">Hemograma</div><small>Precio público sugerido $450</small></div><div class="val">$360</div></div>
+      <div class="price"><div><div class="name">Bioquímica sanguínea</div><small>Precio público sugerido $990</small></div><div class="val">$850</div></div>
+      <div class="price"><div><div class="name">Panel Sanguineo Completo</div><small>Precio público sugerido $1350</small></div><div class="val">$1,080</div></div>
+      <div class="price"><div><div class="name">Interpretación básica</div><small>Vía telefónica</small></div><div class="val">Sin Costo Extra</div></div>
+      <div class="price"><div><div class="name">Consulta de Especialidad</div><small>Debe solicitarse al inicio</small></div><div class="val">$600</div></div>
+    </div>
+    <p class="note" style="margin-top:10px">🤝 Precios para veterinarias aliadas, con un marge de contribución del 15% al 20% sin invensión.</p>
+    <p class="muted">Importante: al solicitar el estudio, deben definir si quieren interpretación básica o consulta de Especialidad; ese servicio no se modifica después.</p>
+    <p class="muted">El precio no cambia si recolectamos o si llevan la muestra a Vetecate, salvo coordinaciones especiales o urgencias.</p>
+  </section>
+
+  <section class="card" style="margin-top:12px">
+    <div class="head"><h2>Cómo funciona</h2><div class="emoji">🗂️</div></div>
+    <div class="timeline">
+      <div class="step"><b>1. Solicitud</b><p>La clínica define el estudio y el tipo de interpretación desde el inicio.</p></div>
+      <div class="step"><b>2. Ruta</b><p>Programamos la recolección por la tarde, de 2:00 a 4:00 pm.</p></div>
+      <div class="step"><b>3. Proceso</b><p>Se analiza la muestra en Vetecate</p></div>
+      <div class="step"><b>4. Respuesta</b><p>Se entregan resultados el mismo día</p></div>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:12px">
+    <div class="head"><h2>Beneficios para colegas</h2><div class="emoji">✨</div></div>
+    <div class="list">
+      <div class="item"><div class="badge">⏱️</div><div><b>Más rapidez</b><span>Menos esperas para tomar decisiones clínicas.</span></div></div>
+      <div class="item"><div class="badge">🧠</div><div><b>Más respaldo</b><span>Interpretación inicial para apoyar al médico tratante.</span></div></div>
+      <div class="item"><div class="badge">🚗</div><div><b>Menos traslados</b><span>Nosotros movemos la logística dentro de ruta.</span></div></div>
+      <div class="item"><div class="badge">💎</div><div><b>Modelo rentable</b><span>Tarifa preferencial que permite margen a la veterinaria.</span></div></div>
+    </div>
+  </section>
+
+  <div class="footer">
+    Vetecate · Tecate, B.C. · Tel. 665 100 2308 · WhatsApp 665 392 4735 · vetecate@gmail.com
+  </div>
+</div>
+<script>
+function show(id, btn){
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
